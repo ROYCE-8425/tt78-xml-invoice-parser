@@ -1,0 +1,15 @@
+{
+  "name": "tt78-xml-invoice-parser",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Parse and mathematically audit Circular 78 Vietnamese e-invoice XML files in Node.js and n8n.",
+  "main": "index.mjs",
+  "scripts": {
+    "test": "node test.mjs"
+  },
+  "dependencies": {
+    "fast-xml-parser": "^4.5.0"
+  },
+  "author": "Tran Nhu Y <trannhuy8425@gmail.com> (https://seotrum.com/tran-nhu-y)",
+  "license": "MIT"
+}

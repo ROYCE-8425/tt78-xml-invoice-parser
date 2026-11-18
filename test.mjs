@@ -1,0 +1,29 @@
+import assert from "node:assert/strict";
+import { parseCircular78Invoice } from "./index.mjs";
+
+const sampleXml = `\uFEFF<?xml version="1.0" encoding="UTF-8"?>
+<inv:HDon xmlns:inv="http://example.vn">
+  <DLHDon>
+    <TTChung>
+      <KHMSHDon>1</KHMSHDon>
+      <KHHDon>C26TAA</KHHDon>
+      <SHDon>00001234</SHDon>
+      <NLap>2026-11-18</NLap>
+    </TTChung>
+    <NDHDon>
+      <NBan><Ten>Cong ty A</Ten><MST>0312345678</MST></NBan>
+      <NMua><Ten>Cong ty B</Ten><MST>0109876543</MST></NMua>
+      <DSHHDVu>
+        <HHDVu><STT>1</STT><TChat>1</TChat><THHDVu>Dich vu Cloud</THHDVu><SLuong>1</SLuong><DGia>1000000</DGia><ThTien>1000000</ThTien><TSuat>10%</TSuat></HHDVu>
+      </DSHHDVu>
+      <TToan><TgTCThue>1000000</TgTCThue><TgTThue>100000</TgTThue><TgTTTBSo>1100000</TgTTTBSo></TToan>
+    </NDHDon>
+  </DLHDon>
+</inv:HDon>`;
+
+const res = parseCircular78Invoice(sampleXml, "0109876543");
+assert.equal(res.nguoiBan.mst, "0312345678");
+assert.equal(res.soHoaDon, "00001234");
+assert.equal(res.items.length, 1);
+assert.equal(res.audit.passed, true);
+console.log("OK:", res.uniqueKey);
